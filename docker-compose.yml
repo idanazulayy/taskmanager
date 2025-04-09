@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  task-service:
+    build: .
+    container_name: task-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    restart: on-failure
